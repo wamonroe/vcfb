@@ -1,0 +1,13 @@
+<% module_namespacing do -%>
+module Submit
+  class Component < <%= defined?(ApplicationComponent) ? "ApplicationComponent" : "ViewComponent::Base" %>
+    include VCFB::ActsAsFormComponent
+
+    def initialize(form, text = nil, options = {})
+      @form = form
+      @text = text
+      @options = options
+    end
+  end
+end
+<% end -%>

@@ -1,0 +1,15 @@
+<% module_namespacing do -%>
+module RichTextArea
+  class Component < <%= defined?(ApplicationComponent) ? "ApplicationComponent" : "ViewComponent::Base" %>
+    include VCFB::ActsAsFormComponent
+
+    def initialize(form, method, options = {})
+      @form = form
+      @method = method
+      @options = options
+    end
+
+    delegate :rich_text_area_tag, to: :helpers
+  end
+end
+<% end -%>

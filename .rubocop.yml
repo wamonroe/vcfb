@@ -1,0 +1,32 @@
+# Use Standard as a style guide while continuing to use RuboCop as a linter and
+# formatter. This allows the use of RuboCop plugins and custom cops that
+# Standard doesn't provide support of out of the box.
+
+# Combine Exclude directives from different config files.
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - rubocop-performance
+  - standard
+
+inherit_gem:
+  standard: config/base.yml
+
+inherit_from:
+  - .rubocop_rspec.yml
+
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: disable
+  SuggestExtensions: false
+  Exclude:
+    # Match Standard's default ignore list:
+    # https://github.com/testdouble/standard/blob/main/lib/standard/creates_config_store/configures_ignored_paths.rb
+    - .git/**/*
+    - node_modules/**/*
+    - vendor/**/*
+    - bin/*
+    - db/schema.rb
+    - tmp/**/*

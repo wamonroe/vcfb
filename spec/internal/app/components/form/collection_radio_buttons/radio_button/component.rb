@@ -1,0 +1,16 @@
+module Form
+  module CollectionRadioButtons
+    module RadioButton
+      class Component < ViewComponent::Base
+        include VCFB::ActsAsFormComponent
+
+        def initialize(form, method, value, options = {})
+          @form = form
+          @method = method
+          @value = value
+          @options = options
+        end
+      end
+    end
+  end
+end
