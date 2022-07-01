@@ -6,7 +6,7 @@ module RichTextArea
     def initialize(form, method, options = {})
       @form = form
       @method = method
-      @options = options
+      @options = <%= defined?(TagOptions::Hash) ? "TagOptions::Hash.new(options)" : "options" %>
     end
 
     delegate :rich_text_area_tag, to: :helpers

@@ -2,6 +2,16 @@
 
 FormBuilder for Rails using ViewComponent
 
+VCFB provides a `FormBuilder` for use with
+[ViewComponent](https://viewcomponent.org/). It was inspired by
+[ViewComponent::Form](https://github.com/pantographe/view_component-form), but
+with the goal to make it easy to apply styling and other formatting within a
+component's `.html.erb` file (rather than in Ruby code).
+
+To further support this goal, if the application includes
+[TagOptions](https://github.com/wamonroe/tag_options), the `vcfb:components`
+will make use of it when saving `options` and `html_options` hashes.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -18,7 +28,31 @@ bundle install
 
 ## Usage
 
-TODO: Fill this out.
+Generate a set components to use with VCFB::FormBuilder
+
+```sh
+rails generate vcfb:components
+```
+
+The generator will install view components for ALL of the form elements
+supported by the version of Rails installed. By default, all of the components
+will be namespaced in `module Form`.
+
+To generate components in a different namespace, use the `--namespace` option
+
+```sh
+rails generate vcfb:components --namespace inline_form
+```
+
+This will generate all the components under `module InlineForm`. To make use of
+these namespaced components, create a custom `FormBuilder` in your application
+inheriting from `VCFB::FormBuilder`.
+
+```ruby
+class InlineFormBuilder < VCFB::FormBuilder
+  self.namespace = "inline_form"
+end
+```
 
 ## Development
 

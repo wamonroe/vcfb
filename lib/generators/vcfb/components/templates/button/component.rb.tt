@@ -6,7 +6,7 @@ module Button
     def initialize(form, text = nil, options = {})
       @form = form
       @text = text
-      @options = options
+      @options = <%= defined?(TagOptions::Hash) ? "TagOptions::Hash.new(options)" : "options" %>
     end
   end
 end
