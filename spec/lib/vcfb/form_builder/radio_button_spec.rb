@@ -1,5 +1,3 @@
-require "support/shared_examples/form_builder_element"
-
 RSpec.describe "VCFB::FormBuilder#radio_button", type: :helper do
   it_behaves_like "form builder element", :radio_button, variations: {
     "with value 1" => [:gender, "male"],

@@ -1,0 +1,188 @@
+#!/usr/bin/env ruby
+
+require "fileutils"
+require "optparse"
+require "open3"
+require "shellwords"
+
+class RunTests
+  class CommandFailed < StandardError
+    def initialize(*args)
+      message = "unable to run command #{args.join(" ")}"
+      super(message)
+    end
+  end
+
+  def initialize(ruby_versions:, rails_versions:, view_component_versions:, verbose: false)
+    @ruby_versions = ruby_versions
+    @rails_versions = rails_versions
+    @view_component_versions = view_component_versions
+    @verbose = verbose
+    @test_success = true
+    @current_ruby_version = current_ruby_version
+    @current_rails_version = ENV["RAILS_VERSION"]
+    @current_view_component_version = ENV["VIEW_COMPONENT_VERSION"]
+  end
+
+  def call
+    in_gem_root do
+      @ruby_versions.each do |ruby_version|
+        use_ruby_version ruby_version
+
+        @rails_versions.each do |rails_version|
+          @view_component_versions.each do |view_component_version|
+            run_tests rails_version, view_component_version
+          end
+        end
+      end
+      @test_success
+    end
+  ensure
+    reset_env
+  end
+
+  private
+
+  def system!(*args)
+    system(*args).tap do |success|
+      raise CommandFailed.new(*args) unless success
+    end
+  end
+
+  def system_capture(*args)
+    `#{args.join(" ")}`.split("\n").map(&:strip)
+  end
+
+  def system_capture!(*args)
+    system_capture(*args).tap do |output|
+      raise CommandFailed.new(*args) unless $?.success?
+    end
+  end
+
+  def remove_gemlock
+    if File.exist?("Gemfile.lock")
+      FileUtils.rm("Gemfile.lock")
+    end
+  rescue
+    raise CommandFailed.new("rm Gemfile.lock")
+  end
+
+  def bundle_install
+    remove_gemlock
+    system! "bundle install --quiet"
+    remove_gemlock
+  end
+
+  def print_versions
+    puts "Running tests for Ruby #{current_ruby_version}, "\
+        "Rails #{current_rails_version}, and " \
+        "ViewComponent #{current_view_component_version}"
+  end
+
+  def current_rails_version
+    output = system_capture!("bundle info rails").first
+    /\* rails \((?<version>[^)]+)\)/.match(output)&.named_captures&.[]("version")
+  end
+
+  def current_ruby_version
+    output = system_capture!("asdf current ruby").first
+    /ruby\s+(?<version>[^\s]+)/.match(output)&.named_captures&.[]("version")
+  end
+
+  def current_view_component_version
+    output = system_capture!("bundle info view_component").first
+    /\* view_component \((?<version>[^)]+)\)/.match(output)&.named_captures&.[]("version")
+  end
+
+  def run_rspec
+    success = if @verbose
+      system "bin/rspec"
+    else
+      system "bin/rspec --require ./spec/bulk_test_formatter.rb --format BulkTestFormatter"
+    end
+    @test_success = false unless success
+  end
+
+  def use_ruby_version(version)
+    install_versions = system_capture!("asdf list ruby")
+    unless install_versions.include?(version)
+      system! "asdf install ruby #{version}"
+    end
+    system! "asdf local ruby #{version}"
+  end
+
+  def run_tests(rails_version, view_component_version)
+    ENV["RAILS_VERSION"] = rails_version
+    ENV["VIEW_COMPONENT_VERSION"] = view_component_version
+    bundle_install
+    print_versions
+    run_rspec
+  end
+
+  def reset_env
+    in_gem_root do
+      reset_ruby
+      reset_rails
+      reset_view_component
+      bundle_install
+    end
+  end
+
+  def reset_ruby
+    use_ruby_version @current_ruby_version
+  end
+
+  def reset_rails
+    if @current_rails_version
+      ENV["RAILS_VERSION"] = @current_rails_version
+    else
+      ENV.delete("RAILS_VERSION")
+    end
+  end
+
+  def reset_view_component
+    if @current_view_component_version
+      ENV["VIEW_COMPONENT_VERSION"] = @current_view_component_version
+    else
+      ENV.delete("VIEW_COMPONENT_VERSION")
+    end
+  end
+
+  def in_gem_root
+    Dir.chdir File.expand_path("../", __dir__) do
+      yield
+    end
+  end
+end
+
+options = {}
+OptionParser.new do |parser|
+  parser.banner = "Usage: test_versions [options]"
+
+  parser.on("--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+
+  parser.on("-x", "--ruby [VERSIONS]", "Run against the specified versions of Ruby") do |versions|
+    options[:ruby_versions] = versions.split(",").map { |v| v.strip.shellescape }
+  end
+
+  parser.on("-r", "--rails [VERSIONS]", "Run against the specified versions of Rails") do |versions|
+    options[:rails_versions] = versions.split(",").map { |v| v.strip.shellescape }
+  end
+
+  parser.on("-v", "--view-component [VERSIONS]", "Run against the specified versions of ViewComponent") do |versions|
+    options[:view_component_versions] = versions.split(",").map { |v| v.strip.shellescape }
+  end
+end.parse!
+
+options[:ruby_versions] ||= %w[2.7.6 3.0.4 3.1.2]
+options[:rails_versions] ||= %w[6.1.0 7.0.0]
+options[:view_component_versions] ||= %w[2.35.0 2.45.0 2.55.0 2.56.0 2.57.0]
+
+if RunTests.new(**options).call
+  puts "\n\e[32mTests successful!\e[0m"
+else
+  puts "\n\e[31mOne or more tests failed\e[0m"
+  exit 1
+end

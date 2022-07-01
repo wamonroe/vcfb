@@ -1,5 +1,3 @@
-require "support/shared_examples/form_builder_element"
-
 RSpec.describe "VCFB::FormBuilder#datetime_select", type: :helper do
   it_behaves_like "form builder element", :datetime_select, variations: {
     "with just a method" => [:birthday],

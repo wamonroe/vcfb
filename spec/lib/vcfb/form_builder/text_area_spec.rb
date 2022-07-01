@@ -1,5 +1,3 @@
-require "support/shared_examples/form_builder_element"
-
 RSpec.describe "VCFB::FormBuilder#text_area", type: :helper do
   it_behaves_like "form builder element", :text_area, variations: {
     "with just a method" => [:profile],

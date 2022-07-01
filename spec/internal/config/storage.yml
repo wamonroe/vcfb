@@ -1,3 +1,3 @@
 test:
   service: Disk
-  root: /Users/alex/Code/personal/vcfb/tmp/storage
+  root: <%= Rails.root.join("tmp", "storage") %>

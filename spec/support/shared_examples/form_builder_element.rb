@@ -2,9 +2,9 @@ require "vcfb/form_builder"
 require "action_text/tag_helper"
 
 RSpec.shared_examples "form builder element" do |form_element, variations: {}, aliases: []|
-  fixtures :users
+  fixtures :authors
 
-  let(:model) { users(:bob) }
+  let(:model) { authors(:bob) }
 
   def renders_the_same_as_rails(form_element, *args, &block)
     expect(render_component_form(form_element, *args, &block))

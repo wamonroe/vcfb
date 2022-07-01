@@ -38,7 +38,7 @@ module VCFB
 
     # SIMPLE SELECTS
 
-    SIMPLE_SELECTS = %i[date_select datetime_select time_select weekday_select]
+    SIMPLE_SELECTS = %i[date_select datetime_select time_select]
     SIMPLE_SELECTS.each do |selector|
       class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
         def #{selector}(method, options = {}, html_options = {})
@@ -156,6 +156,14 @@ module VCFB
       return super unless component_defined?(:time_zone_select)
 
       componentify(:time_zone_select, method, priority_zones, objectify_options(options), @default_html_options.merge(html_options))
+    end
+
+    if Gem::Version.new(Rails::VERSION::STRING) >= Gem::Version.new("7.0")
+      def weekday_select(method, options = {}, html_options = {})
+        return super unless component_defined?(:weekday_select)
+
+        componentify(:weekday_select, method, objectify_options(options), html_options)
+      end
     end
 
     # COMPONENT LOOKUP
