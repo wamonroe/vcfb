@@ -8,6 +8,10 @@ module Form
         @text = text
         @options = options
       end
+
+      def form_element(options = {}, &block)
+        button_tag(options, &block)
+      end
     end
   end
 end

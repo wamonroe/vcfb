@@ -9,6 +9,10 @@ module Form
         @options = options
         @html_options = html_options
       end
+
+      def form_element(options = {}, html_options = {})
+        datetime_select(@form.object_name, @method, options, html_options)
+      end
     end
   end
 end

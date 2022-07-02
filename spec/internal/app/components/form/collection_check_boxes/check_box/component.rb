@@ -11,6 +11,10 @@ module Form
           @checked_value = checked_value
           @unchecked_value = unchecked_value
         end
+
+        def form_element(options = {})
+          check_box(@form.object_name, @method, options, @checked_value, @unchecked_value)
+        end
       end
     end
   end

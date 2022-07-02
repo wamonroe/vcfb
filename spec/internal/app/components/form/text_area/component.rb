@@ -8,6 +8,10 @@ module Form
         @method = method
         @options = options
       end
+
+      def form_element(options = {})
+        text_area(@form.object_name, @method, options)
+      end
     end
   end
 end

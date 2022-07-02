@@ -9,7 +9,9 @@ module Form
         @options = options
       end
 
-      delegate :rich_text_area_tag, to: :helpers
+      def form_element(options = {})
+        rich_text_area(@form.object_name, @method, options)
+      end
     end
   end
 end

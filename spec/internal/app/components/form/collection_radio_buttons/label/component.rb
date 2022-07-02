@@ -11,8 +11,9 @@ module Form
           @options = options
         end
 
-        def before_render
-          @text = content if content.present?
+        def form_element(options = {}, &block)
+          @text = capture(&block) if block
+          label(@form.object_name, @method, @text, options)
         end
       end
     end

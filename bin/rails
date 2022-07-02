@@ -5,7 +5,7 @@ require "rails/version"
 Bundler.require :default, :development
 
 APP_PATH = File.expand_path("../lib/vcfb", __dir__)
-puts ENGINE_ROOT = File.expand_path("../spec/internal", __dir__)
+ENGINE_ROOT = File.expand_path("../spec/internal", __dir__)
 Combustion.initialize! :all
 
 require "rails/commands"

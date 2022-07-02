@@ -14,6 +14,10 @@ module Form
         @options = options
         @html_options = html_options
       end
+
+      def form_element(options = {}, html_options = {})
+        grouped_collection_select(@form.object_name, @method, @collection, @group_method, @group_label_method, @option_key_method, @option_value_method, options, html_options)
+      end
     end
   end
 end

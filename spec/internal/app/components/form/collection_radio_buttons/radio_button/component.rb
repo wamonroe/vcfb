@@ -10,6 +10,10 @@ module Form
           @value = value
           @options = options
         end
+
+        def form_element(options = {})
+          radio_button(@form.object_name, @method, @value, options)
+        end
       end
     end
   end

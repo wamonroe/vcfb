@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Alex Monroe"]
   spec.email = ["alex.monroe@cofense.com"]
   spec.homepage = "https://github.com/wamonroe/vcfb"
-  spec.summary = "Simple helpers and a form builder for use with ViewComponent."
+  spec.summary = "FormBuilder for Rails using ViewComponent"
   spec.description = spec.summary
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"

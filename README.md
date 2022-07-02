@@ -1,6 +1,6 @@
 # VCFB
 
-FormBuilder for Rails using ViewComponent
+> FormBuilder for Rails using ViewComponent
 
 VCFB provides a `FormBuilder` for use with
 [ViewComponent](https://viewcomponent.org/). It was inspired by
@@ -8,8 +8,8 @@ VCFB provides a `FormBuilder` for use with
 with the goal to make it easy to apply styling and other formatting within a
 component's `.html.erb` file (rather than in Ruby code).
 
-To further support this goal, if the application includes
-[TagOptions](https://github.com/wamonroe/tag_options), the `vcfb:components`
+To further support this goal, if the application includes the
+[TagOptions](https://github.com/wamonroe/tag_options) gem, the `vcfb:components`
 will make use of it when saving `options` and `html_options` hashes.
 
 ## Installation
@@ -52,6 +52,16 @@ inheriting from `VCFB::FormBuilder`.
 class InlineFormBuilder < VCFB::FormBuilder
   self.namespace = "inline_form"
 end
+```
+
+To render forms using the generated components, sepecify `VCFB::FormBuilder` or
+a class that inherits from it when using `form_with` or `form_for`.
+
+```ruby
+<%= form_with model: @author, builder: VCFB::FormBuilder do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+<% end %>
 ```
 
 ## Development

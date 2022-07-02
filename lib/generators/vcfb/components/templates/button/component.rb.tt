@@ -8,6 +8,10 @@ module Button
       @text = text
       @options = <%= defined?(TagOptions::Hash) ? "TagOptions::Hash.new(options)" : "options" %>
     end
+
+    def form_element(options = {}, &block)
+      button_tag(options, &block)
+    end
   end
 end
 <% end -%>

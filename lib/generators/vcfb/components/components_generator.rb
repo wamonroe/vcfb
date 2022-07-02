@@ -131,8 +131,10 @@ module Vcfb
       directory "week_field", "#{destination}/week_field"
     end
 
-    def create_weekday_select_component
-      directory "weekday_select", "#{destination}/weekday_select"
+    if Gem::Version.new(Rails::VERSION::STRING) >= Gem::Version.new("7.0")
+      def create_weekday_select_component
+        directory "weekday_select", "#{destination}/weekday_select"
+      end
     end
 
     private

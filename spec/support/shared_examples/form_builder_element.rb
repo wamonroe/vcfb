@@ -7,20 +7,22 @@ RSpec.shared_examples "form builder element" do |form_element, variations: {}, a
   let(:model) { authors(:bob) }
 
   def renders_the_same_as_rails(form_element, *args, &block)
-    expect(render_component_form(form_element, *args, &block))
-      .to eq(render_rails_form(form_element, *args, &block))
+    expect(render_component_element(form_element, *args, &block))
+      .to eq(render_rails_element(form_element, *args, &block))
   end
 
-  def render_component_form(form_element, *args, &block)
-    result = helper.form_with(model: model, builder: VCFB::FormBuilder) do |form|
-      form.public_send(form_element, *args, &block)
+  def render_component_element(form_element, *args, &block)
+    result = ""
+    helper.form_with(model: model, builder: VCFB::FormBuilder) do |form|
+      result = form.public_send(form_element, *args, &block)
     end
     result.gsub(/\n\s*/, "").strip
   end
 
-  def render_rails_form(form_element, *args, &block)
-    result = helper.form_with(model: model) do |form|
-      form.public_send(form_element, *args, &block)
+  def render_rails_element(form_element, *args, &block)
+    result = ""
+    helper.form_with(model: model) do |form|
+      result = form.public_send(form_element, *args, &block)
     end
     result.gsub(/\n\s*/, "").strip
   end
@@ -37,7 +39,7 @@ RSpec.shared_examples "form builder element" do |form_element, variations: {}, a
         it "renders using a ViewComponent #{test_name}" do
           component_class = "Form::#{form_element.to_s.camelize}::Component".constantize
           expect(component_class).to receive(:new).and_return(mock_component)
-          render_component_form(method_name, *args, &block)
+          render_component_element(method_name, *args, &block)
         end
       end
     end

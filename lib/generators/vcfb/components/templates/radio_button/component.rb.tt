@@ -9,6 +9,10 @@ module RadioButton
       @value = value
       @options = <%= defined?(TagOptions::Hash) ? "TagOptions::Hash.new(options)" : "options" %>
     end
+
+    def form_element(options = {})
+      radio_button(@form.object_name, @method, @value, options)
+    end
   end
 end
 <% end -%>

@@ -10,6 +10,10 @@ module Form
         @options = options
         @html_options = html_options
       end
+
+      def form_element(options = {}, html_options = {})
+        time_zone_select(@form.object_name, @method, @priority_zones, options, html_options)
+      end
     end
   end
 end

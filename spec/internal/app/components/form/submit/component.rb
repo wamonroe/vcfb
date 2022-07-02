@@ -8,6 +8,10 @@ module Form
         @text = text
         @options = options
       end
+
+      def form_element(options = {})
+        submit_tag(@text, options)
+      end
     end
   end
 end
