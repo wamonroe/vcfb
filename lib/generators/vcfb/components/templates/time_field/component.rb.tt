@@ -1,0 +1,17 @@
+<% module_namespacing do -%>
+module TimeField
+  class Component < <%= defined?(ApplicationComponent) ? "ApplicationComponent" : "ViewComponent::Base" %>
+    include VCFB::ActsAsFormComponent
+
+    def initialize(form, method, options = {})
+      @form = form
+      @method = method
+      @options = <%= defined?(TagOptions::Hash) ? "TagOptions::Hash.new(options)" : "options" %>
+    end
+
+    def form_element(options = {})
+      time_field(@form.object_name, @method, options)
+    end
+  end
+end
+<% end -%>

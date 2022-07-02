@@ -1,0 +1,13 @@
+---
+denmark:
+  continent: europe
+  name: Denmark
+ireland:
+  continent: europe
+  name: Ireland
+somalia:
+  continent: africa
+  name: Somalia
+south_africa:
+  continent: africa
+  name: South Africa

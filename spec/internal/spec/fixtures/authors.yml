@@ -1,0 +1,36 @@
+---
+bob:
+  accepted_eula: true
+  birthday: 1967-03-12T00:00:00.000Z
+  email: robert.mcbobbington@example.com
+  favorite_color: "#ff0000"
+  gender: male
+  homepage: https://mcbobbington.example.com/
+  name: Robert McBobbington
+  phone: 555-555-5555
+  profile: Please don't call me Bob
+  siblings: 7
+  time_zone: Eastern Time (US & Canada)
+llama:
+  accepted_eula: false
+  email: null
+  favorite_color: null
+  gender: other
+  homepage: null
+  name: His Llamaness
+  phone: null
+  profile: null
+  siblings: null
+  time_zone: null
+sue:
+  accepted_eula: true
+  birthday: 1982-04-12T00:00:00.000Z
+  email: ducks4life@example.com
+  favorite_color: "#800080"
+  gender: female
+  homepage: https://ducksareawesome.example.com/
+  name: Susan Quackers
+  phone: 555-555-5551
+  profile: I love ducks
+  siblings: 0
+  time_zone: Pacific Time (US & Canada)
