@@ -137,6 +137,11 @@ module Vcfb
       end
     end
 
+    def create_form_component
+      copy_file "component.html.erb", "#{destination}/component.html.erb"
+      template "component.rb.tt", "#{destination}/component.rb"
+    end
+
     private
 
     def destination

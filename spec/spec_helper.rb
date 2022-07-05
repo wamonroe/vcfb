@@ -15,6 +15,7 @@ modules = %i[action_view active_record action_text]
 Combustion.initialize!(*modules)
 
 require "rspec/rails"
+require "view_component/version"
 require "vcfb"
 
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
@@ -37,7 +38,7 @@ RSpec.configure do |config|
   config.filter_gems_from_backtrace("view_component")
 
   # Include ViewComponent Helpers
-  config.include MockComponentHelper, type: :helper
+  config.include ComponentSpecHelper, type: :helper
 
   # The settings below are suggested to provide a good initial experience
   # with RSpec, but feel free to customize to your heart's content.

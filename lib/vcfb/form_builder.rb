@@ -12,10 +12,23 @@ module VCFB
     class_attribute :namespace, instance_writer: false, default: "form"
 
     attr_reader :object, :object_name, :template
+    attr_accessor :form_component
 
     def initialize(*args)
       super
       @template = Template.new(@template, self)
+    end
+
+    # FORM COMPONENT
+
+    def self.form_component_class
+      "#{namespace}/component".camelize.constantize
+    end
+
+    def self.form_component_defined?
+      form_component_class.present?
+    rescue
+      false
     end
 
     # SIMPLE FIELDS
@@ -166,23 +179,35 @@ module VCFB
       end
     end
 
-    # COMPONENT LOOKUP
+    # COMPONENT SUPPORT
 
     def component_defined?(form_element)
-      resolve_form_component(form_element).present?
+      resolve_component_class(form_element).present?
     rescue
       false
     end
 
     def componentify(form_element, *args, **opts, &block)
-      form_component_class = resolve_form_component(form_element)
-      @template.render form_component_class.new(self, *args, **opts), &block
+      component_class = resolve_component_class(form_element)
+      @template.render component_class.new(self, *args, **opts), &block
     end
 
-    private
-
-    def resolve_form_component(form_element)
+    def resolve_component_class(form_element)
       VCFB::Resolver.call(namespace, form_element)
+    end
+
+    # SUPPORT FORM COMPONENT SLOTS
+
+    def method_missing(method_name, *args, **opts, &block)
+      super unless method_name.to_s.start_with?("with_")
+
+      form_component.public_send(method_name, *args, **opts, &block)
+    end
+
+    def respond_to_missing?(method_name, include_private = false)
+      super unless method_name.to_s.start_with?("with_")
+
+      form_component.respond_to?(method_name, include_private)
     end
   end
 end
