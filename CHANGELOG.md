@@ -4,6 +4,10 @@
 
 -
 
+## 2.0.1
+
+- Restore usage of tag options gem if present.
+
 ## 2.0.0
 
 - Support rendering of the base form tag via component (including slot support
