@@ -12,8 +12,7 @@ module Form
         end
 
         def form_element(options = {}, &block)
-          @text = capture(&block) if block
-          label(@form.object_name, @method, @text, options)
+          label(@form.object_name, @method, options, &block)
         end
       end
     end
