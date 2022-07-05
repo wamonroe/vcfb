@@ -1,8 +1,7 @@
-require "vcfb/tags/collection_helpers"
-
 module VCFB
   module Tags
     class CollectionCheckBoxes < ActionView::Helpers::Tags::CollectionCheckBoxes
+      # Override the #label and #check_box methods to render via component
       class CheckBoxBuilder < ActionView::Helpers::Tags::CollectionCheckBoxes::Builder
         include CollectionHelpers
 
@@ -18,6 +17,7 @@ module VCFB
         end
       end
 
+      # Override the #render method to use our custom CheckBoxBuilder
       def render(&block)
         render_collection_for(CheckBoxBuilder, &block)
       end

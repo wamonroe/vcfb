@@ -3,6 +3,8 @@ RSpec.describe "VCFB::FormBuilder#label", type: :helper do
     "with just a method" => [:name],
     "with text" => [:name, "Full name"],
     "with a class" => [:name, "Full name", {class: "name-label"}],
+    "with nil text" => [:name, nil, {class: "name-label"}],
+    "with a method and options" => [:name, {class: "name-label"}],
     "with a value" => [:name, "Full name", {value: "full_name"}],
     "with a content block" => [:name, ->(*) { "Full name" }],
     "with an explicit object block" => [:name, ->(builder) { "<em>#{builder.translation}</em>".html_safe }]

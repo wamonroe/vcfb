@@ -1,17 +1,6 @@
 module Form
   module TelephoneField
-    class Component < ViewComponent::Base
-      include VCFB::ActsAsFormComponent
-
-      def initialize(form, method, options = {})
-        @form = form
-        @method = method
-        @options = options
-      end
-
-      def form_element(options = {})
-        telephone_field(@form.object_name, @method, options)
-      end
+    class Component < VCFB::Component::TelephoneField
     end
   end
 end

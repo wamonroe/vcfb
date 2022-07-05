@@ -1,8 +1,7 @@
-require "vcfb/tags/collection_helpers"
-
 module VCFB
   module Tags
     class CollectionRadioButtons < ActionView::Helpers::Tags::CollectionRadioButtons
+      # Override the #label and #radio_button methods to render via component
       class RadioButtonBuilder < ActionView::Helpers::Tags::CollectionRadioButtons::Builder
         include CollectionHelpers
 
@@ -17,6 +16,7 @@ module VCFB
         end
       end
 
+      # Override the #render method to use our custom RadioButtonBuilder
       def render(&block)
         render_collection_for(RadioButtonBuilder, &block)
       end

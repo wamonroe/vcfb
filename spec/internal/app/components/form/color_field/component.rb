@@ -1,17 +1,6 @@
 module Form
   module ColorField
-    class Component < ViewComponent::Base
-      include VCFB::ActsAsFormComponent
-
-      def initialize(form, method, options = {})
-        @form = form
-        @method = method
-        @options = options
-      end
-
-      def form_element(options = {})
-        color_field(@form.object_name, @method, options)
-      end
+    class Component < VCFB::Component::ColorField
     end
   end
 end

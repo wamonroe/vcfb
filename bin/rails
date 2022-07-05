@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "rails/version"
-Bundler.require :default, :development
+require "combustion"
 
 APP_PATH = File.expand_path("../lib/vcfb", __dir__)
 ENGINE_ROOT = File.expand_path("../spec/internal", __dir__)
 Combustion.initialize! :all
+
+Bundler.require :default, :development
 
 require "rails/commands"

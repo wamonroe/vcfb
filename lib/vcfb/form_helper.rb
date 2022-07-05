@@ -1,5 +1,3 @@
-require "vcfb/form_builder"
-
 module VCFB
   module FormHelper
     def component_form_with(model: nil, scope: nil, url: nil, format: nil, **options, &block)

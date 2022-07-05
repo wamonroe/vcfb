@@ -1,5 +1,3 @@
-require "action_view/helpers/tags/collection_helpers"
-
 module VCFB
   module Tags
     module CollectionHelpers

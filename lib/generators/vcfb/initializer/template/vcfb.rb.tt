@@ -1,0 +1,3 @@
+VCFB.configure do |config|
+  config.parent_component = <%= defined?(ApplicationComponent) ? '"ApplicationComponent"' : '"ViewComponent::Base"' %>
+end

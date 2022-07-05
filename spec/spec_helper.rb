@@ -1,3 +1,5 @@
+require "bundler/setup"
+
 if ENV["COVERAGE"] == "true"
   require "simplecov"
   SimpleCov.start do
@@ -11,12 +13,13 @@ if ENV["DEBUG"] == "true"
 end
 
 require "combustion"
+
 modules = %i[action_view active_record action_text]
 Combustion.initialize!(*modules)
 
+Bundler.require :default, :development
+
 require "rspec/rails"
-require "view_component/version"
-require "vcfb"
 
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 

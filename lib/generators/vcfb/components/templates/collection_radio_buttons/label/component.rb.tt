@@ -1,19 +1,7 @@
 <% module_namespacing do -%>
 module CollectionRadioButtons
   module Label
-    class Component < <%= defined?(ApplicationComponent) ? "ApplicationComponent" : "ViewComponent::Base" %>
-      include VCFB::ActsAsFormLabelComponent
-
-      def initialize(form, method, text = nil, options = {})
-        @form = form
-        @method = method
-        @text = text
-        @options = <%= defined?(TagOptions::Hash) ? "TagOptions::Hash.new(options)" : "options" %>
-      end
-
-      def form_element(options = {}, &block)
-        label(@form.object_name, @method, options, &block)
-      end
+    class Component < VCFB::Component::Label
     end
   end
 end

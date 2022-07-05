@@ -35,7 +35,7 @@ RSpec.describe VCFB::Resolver do
 
     it "raises an error if the form component doesn't exist" do
       expect { described_class.call("form", "missing_form component") }
-        .to raise_error(NameError)
+        .to raise_error(VCFB::Errors::ComponentMissing)
     end
   end
 end
