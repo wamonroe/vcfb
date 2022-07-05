@@ -16,7 +16,7 @@ RSpec.shared_examples "form builder element" do |form_element, variations: {}, a
     helper.form_with(model: model, builder: VCFB::FormBuilder) do |form|
       result = form.public_send(form_element, *args, &block)
     end
-    result.gsub(/\n\s*/, "").strip
+    normalize_output(result)
   end
 
   def render_rails_element(form_element, *args, &block)
@@ -24,7 +24,7 @@ RSpec.shared_examples "form builder element" do |form_element, variations: {}, a
     helper.form_with(model: model) do |form|
       result = form.public_send(form_element, *args, &block)
     end
-    result.gsub(/\n\s*/, "").strip
+    normalize_output(result)
   end
 
   [form_element, *Array(aliases)].each do |method_name|
