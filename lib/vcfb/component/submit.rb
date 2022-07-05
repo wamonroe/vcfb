@@ -5,7 +5,7 @@ module VCFB
         run_callbacks :initialize do
           @form = form
           @text = text
-          @options = options
+          @options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(options) : options
         end
       end
 
