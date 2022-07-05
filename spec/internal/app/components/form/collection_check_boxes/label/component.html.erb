@@ -1,3 +1,3 @@
 <%= form_element @options do %>
-  <%= content.presence || @text %>
+  <%= content.presence || @text || default_text %>
 <% end %>

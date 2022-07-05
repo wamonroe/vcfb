@@ -1,7 +1,11 @@
-module Form
+module SlotForm
   module Label
     class Component < ViewComponent::Base
       include VCFB::ActsAsFormLabelComponent
+
+      if Gem::Version.new(ViewComponent::VERSION::STRING) >= Gem::Version.new("2.54.0")
+        renders_one :input
+      end
 
       def initialize(form, method, text = nil, options = {})
         @form = form

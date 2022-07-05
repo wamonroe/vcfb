@@ -9,6 +9,7 @@ module VCFB
 
     included do
       delegate :translation, :to_s, to: :label_builder
+      alias_method :default_text, :translation
     end
 
     private

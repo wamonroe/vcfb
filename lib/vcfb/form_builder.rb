@@ -104,9 +104,9 @@ module VCFB
 
     def collection_radio_buttons_label(method, text = nil, options = {}, &block)
       if component_defined?(:"collection_radio_buttons/label")
-        componentify(:"collection_radio_buttons/label", method, text, options, &block)
+        componentify_with_slots(:"collection_radio_buttons/label", method, text, options, &block)
       elsif component_defined?(:label)
-        componentify(:label, method, text, options, &block)
+        componentify_with_slots(:label, method, text, options, &block)
       else
         label(method, text, options, &block)
       end
@@ -144,7 +144,7 @@ module VCFB
     def label(method, text = nil, options = {}, &block)
       return super unless component_defined?(:label)
 
-      componentify(:label, method, text, objectify_options(options), &block)
+      componentify_with_slots(:label, method, text, objectify_options(options), &block)
     end
 
     def radio_button(method, value, options = {})
@@ -179,6 +179,16 @@ module VCFB
       end
     end
 
+    # BUTTONS
+
+    def button(value = nil, options = {}, &block)
+      # The default #button method captures the block (it never makes it to the
+      # underlying button_tag helper). Stash it here into options so that we can
+      # pull it out later and pass it on to the component to handle.
+      options[:_block_for_component] = block
+      super(value, options, &nil)
+    end
+
     # COMPONENT SUPPORT
 
     def component_defined?(form_element)
@@ -190,6 +200,13 @@ module VCFB
     def componentify(form_element, *args, **opts, &block)
       component_class = resolve_component_class(form_element)
       @template.render component_class.new(self, *args, **opts), &block
+    end
+
+    def componentify_with_slots(form_element, *args, **opts, &block)
+      component_class = resolve_component_class(form_element)
+      @template.render component_class.new(self, *args, **opts) do |component|
+        block&.call(component)
+      end
     end
 
     def resolve_component_class(form_element)
