@@ -1,18 +1,6 @@
 module Form
   module Label
-    class Component < ViewComponent::Base
-      include VCFB::ActsAsFormLabelComponent
-
-      def initialize(form, method, text = nil, options = {})
-        @form = form
-        @method = method
-        @text = text
-        @options = options
-      end
-
-      def form_element(options = {}, &block)
-        label(@form.object_name, @method, options, &block)
-      end
+    class Component < VCFB::Component::Label
     end
   end
 end

@@ -64,6 +64,36 @@ a class that inherits from it when using `form_with` or `form_for`.
 <% end %>
 ```
 
+Generated components support `before_initialize`, `after_initialization`, and `around_initialize` callbacks to minimize the need to override the initlialize methods.
+
+```ruby
+module Form
+  module Label
+    after_initialize :set_component_options
+
+    private
+
+    def set_component_options
+      @size = @options.delete(:size) || :default
+    end
+  end
+end
+```
+
+By default, components will inherit from `ApplicationComponent` if it exists or
+`ViewComponent::Base` if it does not. If you wish to change this behavior,
+generate an initializer and specify the `parent_component`.
+
+```sh
+rails generate vcfb:initializer
+```
+
+```ruby
+VCFB.configure do |config|
+  config.parent_component = "MyCustomBaseComponent"
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run

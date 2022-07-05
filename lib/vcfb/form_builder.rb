@@ -1,12 +1,3 @@
-require "active_support/core_ext/class/attribute"
-require "view_component"
-
-require "vcfb/acts_as_form_component"
-require "vcfb/acts_as_form_collection_component"
-require "vcfb/acts_as_form_label_component"
-require "vcfb/resolver"
-require "vcfb/template"
-
 module VCFB
   class FormBuilder < ::ActionView::Helpers::FormBuilder
     class_attribute :namespace, instance_writer: false, default: "form"
@@ -27,7 +18,7 @@ module VCFB
 
     def self.form_component_defined?
       form_component_class.present?
-    rescue
+    rescue Errors::ComponentMissing
       false
     end
 
@@ -77,6 +68,7 @@ module VCFB
     end
 
     def collection_check_boxes_label(method, text = nil, options = {}, &block)
+      options, text = text, nil if text.is_a?(Hash)
       if component_defined?(:"collection_check_boxes/label")
         componentify(:"collection_check_boxes/label", method, text, options, &block)
       elsif component_defined?(:label)
@@ -103,6 +95,7 @@ module VCFB
     end
 
     def collection_radio_buttons_label(method, text = nil, options = {}, &block)
+      options, text = text, nil if text.is_a?(Hash)
       if component_defined?(:"collection_radio_buttons/label")
         componentify_with_slots(:"collection_radio_buttons/label", method, text, options, &block)
       elsif component_defined?(:label)
@@ -144,6 +137,7 @@ module VCFB
     def label(method, text = nil, options = {}, &block)
       return super unless component_defined?(:label)
 
+      options, text = text, nil if text.is_a?(Hash)
       componentify_with_slots(:label, method, text, objectify_options(options), &block)
     end
 
@@ -181,10 +175,11 @@ module VCFB
 
     # BUTTONS
 
+    # The default #button method captures the block (it never makes it to the
+    # underlying button_tag helper). Stash it here into options so that we can
+    # pull it out later (see vcfb/template) and pass it on to the component so
+    # that we can support slots on button components.
     def button(value = nil, options = {}, &block)
-      # The default #button method captures the block (it never makes it to the
-      # underlying button_tag helper). Stash it here into options so that we can
-      # pull it out later and pass it on to the component to handle.
       options[:_block_for_component] = block
       super(value, options, &nil)
     end
@@ -193,7 +188,7 @@ module VCFB
 
     def component_defined?(form_element)
       resolve_component_class(form_element).present?
-    rescue
+    rescue Errors::ComponentMissing
       false
     end
 

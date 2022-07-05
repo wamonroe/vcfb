@@ -1,17 +1,6 @@
 <% module_namespacing do -%>
 module Button
-  class Component < <%= defined?(ApplicationComponent) ? "ApplicationComponent" : "ViewComponent::Base" %>
-    include VCFB::ActsAsFormComponent
-
-    def initialize(form, text = nil, options = {})
-      @form = form
-      @text = text
-      @options = <%= defined?(TagOptions::Hash) ? "TagOptions::Hash.new(options)" : "options" %>
-    end
-
-    def form_element(options = {}, &block)
-      button_tag(options, &block)
-    end
+  class Component < VCFB::Component::Button
   end
 end
 <% end -%>
