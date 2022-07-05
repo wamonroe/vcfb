@@ -6,8 +6,8 @@ module VCFB
           @form = form
           @method = method
           @priority_zones = priority_zones
-          @options = options
-          @html_options = html_options
+          @options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(options) : options
+          @html_options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(html_options) : html_options
         end
       end
 

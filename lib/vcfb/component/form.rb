@@ -7,7 +7,7 @@ module VCFB
           @scope = scope
           @url = url
           @format = format
-          @options = options
+          @options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(options) : options
           @form = nil
         end
       end

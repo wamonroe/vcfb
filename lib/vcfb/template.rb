@@ -13,10 +13,13 @@ module VCFB
     # Custom Tag Helpers
 
     def button_tag(value, options)
-      return super unless @form.component_defined?(:button)
-
       block = options.delete(:_block_for_component)
-      @form.componentify_with_slots(:button, value, options, &block)
+      if @form.component_defined?(:button)
+        @form.componentify_with_slots(:button, value, options, &block)
+      else
+        value = @template.capture(value, &block)
+        super(value, options)
+      end
     end
 
     def submit_tag(value, options)

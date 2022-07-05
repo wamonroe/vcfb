@@ -10,8 +10,8 @@ module VCFB
           @group_label_method = group_label_method
           @option_key_method = option_key_method
           @option_value_method = option_value_method
-          @options = options
-          @html_options = html_options
+          @options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(options) : options
+          @html_options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(html_options) : html_options
         end
       end
 

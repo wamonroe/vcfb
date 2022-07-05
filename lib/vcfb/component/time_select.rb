@@ -5,8 +5,8 @@ module VCFB
         run_callbacks :initialize do
           @form = form
           @method = method
-          @options = options
-          @html_options = html_options
+          @options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(options) : options
+          @html_options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(html_options) : html_options
         end
       end
 

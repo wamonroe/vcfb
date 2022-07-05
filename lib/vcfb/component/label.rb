@@ -9,7 +9,7 @@ module VCFB
           @form = form
           @method = method
           @text = text
-          @options = options
+          @options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(options) : options
         end
       end
 
