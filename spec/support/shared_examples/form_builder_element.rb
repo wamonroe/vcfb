@@ -39,7 +39,7 @@ RSpec.shared_examples "form builder element" do |form_element, variations: {}, a
         it "renders using a ViewComponent #{test_name}" do
           component_class = "Form::#{form_element.to_s.camelize}::Component".constantize
           expect(component_class).to receive(:new).and_return(mock_component)
-          render_component_element(method_name, *args, &block)
+          render_component_element(method_name, *args)
         end
       end
     end

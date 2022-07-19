@@ -22,6 +22,19 @@ module VCFB
       def collection_radio_buttons(object, method, collection, value_method, text_method, options = {}, html_options = {}, &block)
         VCFB::Tags::CollectionRadioButtons.new(object, method, self, collection, value_method, text_method, options, html_options).render(&block)
       end
+
+      private
+
+      def deobjectify_options!(options)
+        if instance_variable_defined?(:@form)
+          keys = @form.send(:objectify_options, {}).keys
+          options.extract!(*keys)
+        elsif defined?(TagOptions::Hash)
+          TagOptions::Hash.new
+        else
+          {}
+        end
+      end
     end
   end
 end
