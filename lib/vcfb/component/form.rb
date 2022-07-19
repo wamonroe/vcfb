@@ -8,7 +8,6 @@ module VCFB
           @url = url
           @format = format
           @options = defined?(TagOptions::Hash) ? TagOptions::Hash.new(options) : options
-          @form = nil
         end
       end
 
@@ -30,6 +29,8 @@ module VCFB
       # Override #content and #get_slot from ViewComponent so that we can yield
       # the form element (and not the component).
       def content
+        return unless instance_variable_defined?(:@form)
+
         if @view_context && @__vc_render_in_block
           @__vc_content = view_context.capture(@form, &@__vc_render_in_block)
         end

@@ -2,9 +2,7 @@ RSpec.describe "VCFB::FormHelper", type: :helper do
   context "#component_form_with" do
     it "renders a form using a component" do
       expect(Form::Component).to receive(:new).at_least(:once).and_return(mock_component)
-      helper.component_form_with(model: Author.new) do |form|
-        form.text_field :name
-      end
+      helper.component_form_with(model: Author.new)
     end
 
     it "renders the same as #form_with" do

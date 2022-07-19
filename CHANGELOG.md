@@ -4,6 +4,10 @@
 
 -
 
+## 2.0.2
+
+- Support for ViewComponent 2.61.0
+
 ## 2.0.1
 
 - Restore usage of tag options gem if present.
