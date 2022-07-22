@@ -89,3 +89,7 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 end
+
+puts "Running tests for Ruby #{RUBY_VERSION}, " \
+        "Rails #{Gem.loaded_specs["rails"].version}, and " \
+        "ViewComponent #{Gem.loaded_specs["view_component"].version}"

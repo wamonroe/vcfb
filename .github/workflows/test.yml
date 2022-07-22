@@ -2,6 +2,7 @@ name: Test
 on: [push, pull_request]
 jobs:
   test:
+    name: Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }}, ViewComponent ${{matrix.view_component}}
     strategy:
       fail-fast: false
       matrix:
@@ -11,13 +12,13 @@ jobs:
           - "2.7"
         rails:
           - "6.1.0"
-          - "7.0" # 7.x latest
+          - "latest"
         view_component:
           - "2.35.0"
           - "2.45.0"
           - "2.55.0"
           - "2.60.0"
-          - "2.0" # 2.x latest
+          - "latest"
     runs-on: ubuntu-latest
     env:
       RAILS_VERSION: ${{ matrix.rails }}
