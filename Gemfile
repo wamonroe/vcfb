@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 if (rails_version = ENV["RAILS_VERSION"])
   if rails_version == "main"
     gem "rails", github: "rails/rails"
-  elsif view_component_version != "latest"
+  elsif rails_version != "latest"
     gem "rails", "~> #{rails_version}"
   end
 end
