@@ -2,6 +2,8 @@ module VCFB
   class FormBuilder < ::ActionView::Helpers::FormBuilder
     class_attribute :namespace, instance_writer: false, default: "form"
 
+    delegate :resolve_component_class, to: "self.class"
+
     attr_reader :object, :object_name, :template
     attr_accessor :form_component
 
@@ -13,13 +15,17 @@ module VCFB
     # FORM COMPONENT
 
     def self.form_component_class
-      "#{namespace}/component".camelize.constantize
+      resolve_component_class
     end
 
     def self.form_component_defined?
       form_component_class.present?
     rescue Errors::ComponentMissing
       false
+    end
+
+    def self.resolve_component_class(form_element = nil)
+      VCFB::Resolver.call(namespace, form_element)
     end
 
     # SIMPLE FIELDS
@@ -202,10 +208,6 @@ module VCFB
       @template.render component_class.new(self, *args, **opts) do |component|
         block&.call(component)
       end
-    end
-
-    def resolve_component_class(form_element)
-      VCFB::Resolver.call(namespace, form_element)
     end
 
     # SUPPORT FORM COMPONENT SLOTS
