@@ -27,4 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-rails", "~> 5.1"
   spec.add_development_dependency "rubocop-rspec", "~> 2.11"
   spec.add_development_dependency "standard", "~> 1.12"
+  spec.add_development_dependency "sqlite3"
 end

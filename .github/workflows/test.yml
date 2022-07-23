@@ -1,0 +1,33 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  test:
+    name: Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }}, ViewComponent ${{matrix.view_component}}
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - "3.1"
+          - "3.0"
+          - "2.7"
+        rails:
+          - "6.1.0"
+          - "latest"
+        view_component:
+          - "2.35.0"
+          - "2.45.0"
+          - "2.55.0"
+          - "2.60.0"
+          - "latest"
+    runs-on: ubuntu-latest
+    env:
+      RAILS_VERSION: ${{ matrix.rails }}
+      VIEW_COMPONENT_VERSION: ${{ matrix.view_component }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true # runs bundle install and caches installed gems automatically
+          bundler: ${{ env.BUNDLER_VERSION || 'latest' }}
+      - run: bundle exec rspec
