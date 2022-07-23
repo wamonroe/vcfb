@@ -11,8 +11,16 @@ with the goal to make it easy to apply styling and other formatting within a
 component's `.html.erb` file (rather than in Ruby code).
 
 To further support this goal, if the application includes the
-[TagOptions](https://github.com/wamonroe/tag_options) gem, the `vcfb:components`
-will make use of it when saving `options` and `html_options` hashes.
+[TagOptions](https://github.com/wamonroe/tag_options) gem, `VCFB` will make use
+of it when initializing `@options` and `@html_options` hashes.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Settings](#settings)
+- [Styling Components with TagOptions](#styling-components-with-tagoptions)
+- [Development](#development)
 
 ## Installation
 
@@ -28,7 +36,7 @@ And then execute:
 bundle install
 ```
 
-## Usage
+## Getting Started
 
 Generate a set components to use with VCFB::FormBuilder
 
@@ -37,8 +45,14 @@ rails generate vcfb:components
 ```
 
 The generator will install view components for ALL of the form elements
-supported by the version of Rails installed. By default, all of the components
-will be namespaced in `module Form`.
+supported by the version of Rails installed, including a component to generate
+the form itself. By default, all of the components will be namespaced in `module Form`.
+
+`VCFB::FormBuilder` with its default set of components renders form elements
+functionaly identical to the the built-in Rails tag helpers. If, however, you
+don't need or want to render certain form elements using a component it is safe
+to delete the unused ones. `VCFB::FormBuilder` will fall back to rendering using
+the built-in Rails tag helpers if a component for that element doesn't exist.
 
 To generate components in a different namespace, use the `--namespace` option
 
@@ -56,17 +70,29 @@ class InlineFormBuilder < VCFB::FormBuilder
 end
 ```
 
-To render forms using the generated components, sepecify `VCFB::FormBuilder` or
-a class that inherits from it when using `form_with` or `form_for`.
+To render forms using the generated components, use the included
+`component_form_with` helper.
 
-```ruby
-<%= form_with model: @author, builder: VCFB::FormBuilder do |form| %>
+```erb
+<%= component_form_with model: @author do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
 <% end %>
 ```
 
-Generated components support `before_initialize`, `after_initialization`, and `around_initialize` callbacks to minimize the need to override the initlialize methods.
+If using a custom form builder inheriting from `VCFB::FormBuilder`, pass the
+`:builder` option to `component_form_with`.
+
+```erb
+<%= component_form_with model: @author, builder: InlineFormBuilder do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+<% end %>
+```
+
+Generated components support `before_initialize`, `after_initialization`, and
+`around_initialize` callbacks to minimize the need to override the initlialize
+methods.
 
 ```ruby
 module Form
@@ -82,6 +108,8 @@ module Form
 end
 ```
 
+## Settings
+
 By default, components will inherit from `ApplicationComponent` if it exists or
 `ViewComponent::Base` if it does not. If you wish to change this behavior,
 generate an initializer and specify the `parent_component`.
@@ -94,6 +122,43 @@ rails generate vcfb:initializer
 VCFB.configure do |config|
   config.parent_component = "MyCustomBaseComponent"
 end
+```
+
+## Styling Components with TagOptions
+
+> The examples below use `TagOptions::Hash` to make it easy to manipulate
+> options passed to generate the form elements. See
+> [TagOptions](https://github.com/wamonroe/tag_options) for more information
+> about the options available.
+
+For form elements, `VCFB` provides a `form_element` helper that will render
+the field, select, button, etc.
+
+The `button`, `check_box`, `label`, `radio_buton`, `rich_text_area`, `submit`,
+`text_area` and all the `*_field` elements are styled using only an `@options`
+hash.
+
+```erb
+<%# app/components/form/text_field/component.html.erb %>
+<%= form_element @options.at(:class).combine!("shadow-sm block border-gray-300 rounded-md") %>
+```
+
+The `collection_check_boxes`, `collection_radio_buttons`, `select`, and all of
+the `*_select` elements have an `@options`, but are styled with an
+`@html_options` hash.
+
+```erb
+<%# app/components/form/select/component.html.erb %>
+<%= form_element @options, @html_options.at(:class).combine!("shadow-sm block border-gray-300 rounded-md") %>
+```
+
+The main form element is rendered with a `form_tag` helper and is styled with an `@options` hash.
+
+```erb
+<%# app/components/form/component.html.erb %>
+<%= form_tag @options.at(:class).combine!("mt-8 space-y-6") do |form| %>
+  <%= content %>
+<% end %>
 ```
 
 ## Development
