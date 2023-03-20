@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name = "vcfb"
   spec.version = VCFB::VERSION
   spec.authors = ["Alex Monroe"]
-  spec.email = ["alex.monroe@cofense.com"]
+  spec.email = ["alex@monroepost.com"]
   spec.homepage = "https://github.com/wamonroe/vcfb"
   spec.summary = "FormBuilder for Rails using ViewComponent"
   spec.description = spec.summary
