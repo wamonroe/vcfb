@@ -20,5 +20,14 @@ end
 # Specify your gem's dependencies in vcfb.gemspec.
 gemspec
 
-gem "debug", require: false
+gem "pry-byebug"
+gem "rake"
 gem "simplecov", require: false
+gem "rspec-rails"
+
+# Code formating and linting
+gem "erb_lint"
+gem "htmlbeautifier"
+gem "rubocop-rails"
+gem "rubocop-rspec"
+gem "standard"

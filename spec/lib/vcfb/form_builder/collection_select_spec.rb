@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#collection_select", type: :helper do
   it_behaves_like "form builder element", :collection_select, variations: {
     "for related resources" => [:author_ids, Author.all, :id, :name],

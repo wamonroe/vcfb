@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#submit", type: :helper do
   it_behaves_like "form builder element", :submit, variations: {
     "by itself" => [],

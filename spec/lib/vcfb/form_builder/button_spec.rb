@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#button", type: :helper do
   it_behaves_like "form builder element", :button, variations: {
     "with string value" => ["Update author"],

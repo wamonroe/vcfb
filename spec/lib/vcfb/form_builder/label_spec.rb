@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#label", type: :helper do
   it_behaves_like "form builder element", :label, variations: {
     "with just a method" => [:name],
@@ -7,7 +9,7 @@ RSpec.describe "VCFB::FormBuilder#label", type: :helper do
     "with a method and options" => [:name, {class: "name-label"}],
     "with a value" => [:name, "Full name", {value: "full_name"}],
     "with a content block" => [:name, ->(*) { "Full name" }],
-    "with an explicit object block" => [:name, ->(builder) { "<em>#{builder.translation}</em>".html_safe }]
+    "with an explicit object block" => [:name, ->(builder) { "<em>#{builder.translation}</em>".html_safe }] # rubocop:disable Rails/OutputSafety
   }
 
   if Gem::Version.new(ViewComponent::VERSION::STRING) >= Gem::Version.new("2.54.0")
@@ -21,13 +23,13 @@ RSpec.describe "VCFB::FormBuilder#label", type: :helper do
         end
       end
       expect(normalize_output(result))
-        .to eq '<label>Name<input type="text" name="author[name]" /></label>'
+        .to eq '<label for="author_name">Name<input type="text" name="author[name]" id="author_name" /></label>'
     end
   end
 
   if Gem::Version.new(Rails::VERSION::STRING) >= Gem::Version.new("6.1")
     it_behaves_like "form builder element", :label, variations: {
-      "with an implied object block" => [:name, ->(translation) { "<em>#{translation}</em>".html_safe }]
+      "with an implied object block" => [:name, ->(translation) { "<em>#{translation}</em>".html_safe }] # rubocop:disable Rails/OutputSafety
     }
   end
 end

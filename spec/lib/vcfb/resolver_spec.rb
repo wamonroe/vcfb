@@ -1,3 +1,4 @@
+require "rails_helper"
 require "vcfb/resolver"
 
 module Form

@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#collection_check_boxes", type: :helper do
   fixtures :authors
 
