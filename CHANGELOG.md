@@ -4,9 +4,13 @@
 
 -
 
+## 2.1.0
+
+- Removed support for Ruby 2.7.
+
 ## 2.0.2
 
-- Support for ViewComponent 2.61.0
+- Support for ViewComponent 2.61.0.
 
 ## 2.0.1
 
