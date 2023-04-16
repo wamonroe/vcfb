@@ -1,6 +1,8 @@
 require "support/shared_examples/form_builder_element"
 require "vcfb/action_view_tag_patch"
 
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#search_field", type: :helper do
   it_behaves_like "form builder element", :search_field, variations: {
     "with just a method" => [:name],

@@ -1,15 +1,11 @@
 *.gem
 *.rbc
 /.config
-/coverage/
 /InstalledFiles
 /pkg/
 /spec/reports/
 /spec/examples.txt
-/spec/internal/db/combustion_test.sqlite
-/test/tmp/
-/test/version_tmp/
-/tmp/
+/spec/dummy/db/test.sqlite3
 
 ## Documentation cache and generated files:
 /.yardoc/
@@ -19,7 +15,7 @@
 
 ## Environment normalization:
 /.bundle/
-/vendor/bundle
+/spec/dummy/vendor/bundle
 /lib/bundler/man/
 
 # Allow the gem to be tested in multiple environments
@@ -27,31 +23,32 @@ Gemfile.lock
 .tool-versions
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+/spec/dummy/log/*
+/spec/dummy/tmp/*
+!/spec/dummy/log/.keep
+!/spec/dummy/tmp/.keep
+
 
 # Ignore pidfiles, but keep the directory.
-/tmp/pids/*
-!/tmp/pids/
-!/tmp/pids/.keep
+/spec/dummy/tmp/pids/*
+!/spec/dummy/tmp/pids/
+!/spec/dummy/tmp/pids/.keep
 
 # Ignore uploaded files in development.
-/storage/*
-!/storage/.keep
-/tmp/storage/*
-!/tmp/storage/
-!/tmp/storage/.keep
+/spec/dummy/storage/*
+!/spec/dummy/storage/.keep
+/spec/dummy/tmp/storage/*
+!/spec/dummy/tmp/storage/
+!/spec/dummy/tmp/storage/.keep
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+/spec/dummy/config/master.key
 
 # Ignore assets
-/app/assets/builds/*
-!/app/assets/builds/.keep
-/public/assets
-/node_modules
+/spec/dummy/app/assets/builds/*
+!/spec/dummy/app/assets/builds/.keep
+/spec/dummy/public/assets
+/spec/dummy/node_modules
 
 # Ignore code coverage
 /coverage

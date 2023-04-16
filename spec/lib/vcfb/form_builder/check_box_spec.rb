@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#check_box", type: :helper do
   it_behaves_like "form builder element", :check_box, variations: {
     "with just a method" => [:accepted_eula],

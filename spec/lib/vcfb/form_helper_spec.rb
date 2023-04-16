@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormHelper", type: :helper do
   context "#component_form_with" do
     it "renders a form using a component" do
@@ -19,7 +21,7 @@ RSpec.describe "VCFB::FormHelper", type: :helper do
         end
         output = normalize_output(result)
         expect(output).to include "<h1>Taco Form</h1>"
-        expect(output).to include '<input type="text" name="author[name]" />'
+        expect(output).to include '<input type="text" name="author[name]" id="author_name" />'
       end
     end
   end

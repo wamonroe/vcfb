@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::Component::Base", type: :helper do
   it "supports callbacks" do
     helper.form_with(model: Author.new, builder: SlotFormBuilder) do |form|

@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#date_select", type: :helper do
   it_behaves_like "form builder element", :date_select, variations: {
     "with just a method" => [:birthday],

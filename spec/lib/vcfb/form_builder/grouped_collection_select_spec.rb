@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "VCFB::FormBuilder#grouped_collection_select", type: :helper do
   fixtures :continents, :countries
 
