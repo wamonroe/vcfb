@@ -149,16 +149,12 @@ module Vcfb
     private
 
     def destination
-      if options[:skip_namespace]
-        "app/components"
-      else
-        "app/components/#{options[:namespace]}"
-      end
+      "app/components/#{options[:namespace]}"
     end
 
     def module_namespacing(&block)
       content = capture(&block)
-      content = wrap_with_namespace(content) unless options[:skip_namespace]
+      content = wrap_with_namespace(content)
       concat(content)
     end
 
