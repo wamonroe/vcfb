@@ -16,11 +16,15 @@ module VCFB
       private
 
       def form_field(...)
-        public_send(form_field_name, ...)
+        if respond_to?(form_field_name)
+          public_send(form_field_name, ...)
+        else
+          text_field(...)
+        end
       end
 
       def form_field_name
-        if self.class.name.end_with?("::Component")
+        @form_field_name ||= if self.class.name.end_with?("::Component")
           self.class.name.delete_suffix("::Component").demodulize.underscore
         else
           self.class.name.demodulize.underscore
