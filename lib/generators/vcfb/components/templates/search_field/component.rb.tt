@@ -1,6 +1,6 @@
 <% module_namespacing do -%>
 module SearchField
-  class Component < VCFB::Component::SearchField
+  class Component < SimpleField::Component
   end
 end
 <% end -%>

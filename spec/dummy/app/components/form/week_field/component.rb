@@ -1,6 +1,6 @@
 module Form
   module WeekField
-    class Component < VCFB::Component::WeekField
+    class Component < SimpleField::Component
     end
   end
 end

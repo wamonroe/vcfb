@@ -95,6 +95,10 @@ module Vcfb
       directory "select", "#{destination}/select"
     end
 
+    def create_simple_field_component
+      directory "simple_field", "#{destination}/simple_field"
+    end
+
     def create_submit_component
       directory "submit", "#{destination}/submit"
     end

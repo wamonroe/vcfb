@@ -1,6 +1,6 @@
 module Form
   module RangeField
-    class Component < VCFB::Component::RangeField
+    class Component < SimpleField::Component
     end
   end
 end

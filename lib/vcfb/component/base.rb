@@ -1,3 +1,5 @@
+require "active_model/callbacks"
+
 module VCFB
   module Component
     class Base < VCFB.parent_component.constantize

@@ -1,6 +1,6 @@
 module Form
   module TimeField
-    class Component < VCFB::Component::TimeField
+    class Component < SimpleField::Component
     end
   end
 end

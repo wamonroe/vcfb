@@ -1,0 +1,6 @@
+<% module_namespacing do -%>
+module SimpleField
+  class Component < VCFB::Component::SimpleField
+  end
+end
+<% end -%>

@@ -1,6 +1,6 @@
 module Form
   module NumberField
-    class Component < VCFB::Component::NumberField
+    class Component < SimpleField::Component
     end
   end
 end

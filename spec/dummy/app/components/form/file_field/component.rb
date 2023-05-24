@@ -1,6 +1,6 @@
 module Form
   module FileField
-    class Component < VCFB::Component::FileField
+    class Component < SimpleField::Component
     end
   end
 end
