@@ -1,6 +1,6 @@
 module Form
   module EmailField
-    class Component < VCFB::Component::EmailField
+    class Component < SimpleField::Component
     end
   end
 end

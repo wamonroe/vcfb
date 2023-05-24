@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class WeekdaySelect < Base
+    class WeekdaySelect < BaseField
       def initialize(form, method, options = {}, html_options = {})
         run_callbacks :initialize do
           @form = form

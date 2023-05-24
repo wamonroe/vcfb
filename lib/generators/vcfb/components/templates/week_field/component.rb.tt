@@ -1,6 +1,6 @@
 <% module_namespacing do -%>
 module WeekField
-  class Component < VCFB::Component::WeekField
+  class Component < SimpleField::Component
   end
 end
 <% end -%>

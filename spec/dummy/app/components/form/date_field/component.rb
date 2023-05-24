@@ -1,6 +1,6 @@
 module Form
   module DateField
-    class Component < VCFB::Component::DateField
+    class Component < SimpleField::Component
     end
   end
 end

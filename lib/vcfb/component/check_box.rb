@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class CheckBox < Base
+    class CheckBox < BaseField
       def initialize(form, method, options = {}, checked_value = "1", unchecked_value = "0")
         run_callbacks :initialize do
           @form = form

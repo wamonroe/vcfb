@@ -30,6 +30,7 @@ module VCFB
     def self.setup!
       autoload :Base, "vcfb/component/base"
       autoload :BaseCollection, "vcfb/component/base_collection"
+      autoload :BaseField, "vcfb/component/base_field"
       autoload :Button, "vcfb/component/button"
       autoload :CheckBox, "vcfb/component/check_box"
       autoload :CollectionCheckBoxes, "vcfb/component/collection_check_boxes"
@@ -40,6 +41,7 @@ module VCFB
       autoload :DateSelect, "vcfb/component/date_select"
       autoload :DatetimeField, "vcfb/component/datetime_field"
       autoload :DatetimeSelect, "vcfb/component/datetime_select"
+      autoload :Deprecated, "vcfb/component/deprecated"
       autoload :EmailField, "vcfb/component/email_field"
       autoload :FileField, "vcfb/component/file_field"
       autoload :Form, "vcfb/component/form"
@@ -53,6 +55,7 @@ module VCFB
       autoload :RichTextArea, "vcfb/component/rich_text_area"
       autoload :SearchField, "vcfb/component/search_field"
       autoload :Select, "vcfb/component/select"
+      autoload :SimpleField, "vcfb/component/simple_field"
       autoload :Submit, "vcfb/component/submit"
       autoload :TelephoneField, "vcfb/component/telephone_field"
       autoload :TextArea, "vcfb/component/text_area"

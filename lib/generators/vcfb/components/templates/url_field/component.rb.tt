@@ -1,6 +1,6 @@
 <% module_namespacing do -%>
 module UrlField
-  class Component < VCFB::Component::UrlField
+  class Component < SimpleField::Component
   end
 end
 <% end -%>

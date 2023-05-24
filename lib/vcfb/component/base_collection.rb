@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class BaseCollection < Base
+    class BaseCollection < BaseField
       private
 
       def content

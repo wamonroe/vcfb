@@ -1,6 +1,6 @@
 module Form
   module TelephoneField
-    class Component < VCFB::Component::TelephoneField
+    class Component < SimpleField::Component
     end
   end
 end

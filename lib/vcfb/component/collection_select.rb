@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class CollectionSelect < Base
+    class CollectionSelect < BaseField
       def initialize(form, method, collection, value_method, text_method, options = {}, html_options = {})
         run_callbacks :initialize do
           @form = form

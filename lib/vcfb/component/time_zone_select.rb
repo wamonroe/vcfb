@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class TimeZoneSelect < Base
+    class TimeZoneSelect < BaseField
       def initialize(form, method, priority_zones = nil, options = {}, html_options = {})
         run_callbacks :initialize do
           @form = form

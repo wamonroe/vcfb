@@ -1,6 +1,6 @@
 module Form
   module TextField
-    class Component < VCFB::Component::TextField
+    class Component < SimpleField::Component
     end
   end
 end

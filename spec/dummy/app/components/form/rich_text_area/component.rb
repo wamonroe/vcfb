@@ -1,6 +1,6 @@
 module Form
   module RichTextArea
-    class Component < VCFB::Component::RichTextArea
+    class Component < SimpleField::Component
     end
   end
 end

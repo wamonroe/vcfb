@@ -1,6 +1,6 @@
 module Form
   module TextArea
-    class Component < VCFB::Component::TextArea
+    class Component < SimpleField::Component
     end
   end
 end

@@ -1,8 +1,12 @@
 # CHANGELOG
 
-## Main
+## 2.2.0 - unreleased
 
--
+- Refactored inheritance for simple inputs to support inherited ViewComponent
+  templates.
+- Added helper methods `resource` and `resource_errors?` to all components.
+- Added helper methods `validation_errors` and `validation_errors?` to the label
+  component and all other components responsible for rendering various inputs.
 
 ## 2.1.0
 

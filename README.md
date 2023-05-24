@@ -18,6 +18,8 @@ of it when initializing `@options` and `@html_options` hashes.
 
 - [Installation](#installation)
 - [Getting Started](#getting-started)
+- [Template Inheritance](#template-inheritance)
+  - [SimpleField::Component](#simplefieldcomponent)
 - [Settings](#settings)
 - [Styling Components with TagOptions](#styling-components-with-tagoptions)
 - [Development](#development)
@@ -103,6 +105,71 @@ module Form
 
     def set_component_options
       @size = @options.delete(:size) || :default
+    end
+  end
+end
+```
+
+## Template Inheritance
+
+After version 2.2.0, form components are generated with the following hierarchy.
+Children components are not generated with templates, but rather fall back to
+the template used by their parent. To customize a child component, create a file
+named `component.html.erb` in the child component's directory.
+
+- Button::Component
+- CheckBox::Component
+- CollectionCheckBoxes::Component
+- CollectionRadioButtons::Component
+- CollectionSelect::Component
+- DateSelect::Component
+- DatetimeSelect::Component
+- Form::Component
+- GroupedCollectionSelect::Component
+- Label::Component
+- RadioButton::Component
+- Select::Component
+- SimpleField::Component
+  - ColorField::Component
+  - DateField::Component
+  - DatetimeField::Component
+  - EmailField::Component
+  - FileField::Component
+  - MonthField::Component
+  - NumberField::Component
+  - PasswordField::Component
+  - RangeField::Component
+  - RichTextArea::Component
+  - SearchField::Component
+  - TelephoneField::Component
+  - TextArea::Component
+  - TextField::Component
+  - TimeField::Component
+  - UrlField::Component
+  - WeekField::Component
+- Submit::Component
+- TimeSelect::Component
+- TimeZoneSelect::Component
+- WeekdaySelect::Component
+
+### SimpleField::Component
+
+By default `SimpleField::Component` infers the form field to use based on the
+name of the component. If you are creating a custom form component, or otherwise
+need to customize this behavior, define a `form_field_name` on your component,
+returning the name of the Rails form helper method to call. For example:
+
+```ruby
+module Form
+  module CurrencyField
+    class Component < SimpleField::Component
+      # ...
+
+      private
+
+      def form_field_name
+        "text_field"
+      end
     end
   end
 end

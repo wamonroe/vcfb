@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class Select < Base
+    class Select < BaseField
       def initialize(form, method, choices = nil, options = {}, html_options = {})
         run_callbacks :initialize do
           @form = form

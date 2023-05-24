@@ -1,3 +1,5 @@
+require "active_model/callbacks"
+
 module VCFB
   module Component
     class Base < VCFB.parent_component.constantize
@@ -21,6 +23,14 @@ module VCFB
 
       def collection_radio_buttons(object, method, collection, value_method, text_method, options = {}, html_options = {}, &block)
         VCFB::Tags::CollectionRadioButtons.new(object, method, self, collection, value_method, text_method, options, html_options).render(&block)
+      end
+
+      def resource
+        @form.object
+      end
+
+      def resource_errors?
+        resource&.errors&.present?
       end
 
       private

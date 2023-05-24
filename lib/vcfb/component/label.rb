@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class Label < Base
+    class Label < BaseField
       delegate :translation, :to_s, to: :label_builder
       alias_method :default_text, :translation
 

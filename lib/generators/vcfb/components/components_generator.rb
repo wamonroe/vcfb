@@ -95,6 +95,10 @@ module Vcfb
       directory "select", "#{destination}/select"
     end
 
+    def create_simple_field_component
+      directory "simple_field", "#{destination}/simple_field"
+    end
+
     def create_submit_component
       directory "submit", "#{destination}/submit"
     end
@@ -145,16 +149,12 @@ module Vcfb
     private
 
     def destination
-      if options[:skip_namespace]
-        "app/components"
-      else
-        "app/components/#{options[:namespace]}"
-      end
+      "app/components/#{options[:namespace]}"
     end
 
     def module_namespacing(&block)
       content = capture(&block)
-      content = wrap_with_namespace(content) unless options[:skip_namespace]
+      content = wrap_with_namespace(content)
       concat(content)
     end
 
