@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class RichTextArea < Base
+    class RichTextArea < BaseField
       def initialize(form, method, options = {})
         run_callbacks :initialize do
           @form = form

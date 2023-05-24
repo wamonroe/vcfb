@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class GroupedCollectionSelect < Base
+    class GroupedCollectionSelect < BaseField
       def initialize(form, method, collection, group_method, group_label_method, option_key_method, option_value_method, options = {}, html_options = {})
         run_callbacks :initialize do
           @form = form

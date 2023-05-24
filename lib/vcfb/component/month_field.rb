@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class MonthField < Base
+    class MonthField < BaseField
       def initialize(form, method, options = {})
         run_callbacks :initialize do
           @form = form

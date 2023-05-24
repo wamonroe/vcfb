@@ -30,6 +30,7 @@ module VCFB
     def self.setup!
       autoload :Base, "vcfb/component/base"
       autoload :BaseCollection, "vcfb/component/base_collection"
+      autoload :BaseField, "vcfb/component/base_field"
       autoload :Button, "vcfb/component/button"
       autoload :CheckBox, "vcfb/component/check_box"
       autoload :CollectionCheckBoxes, "vcfb/component/collection_check_boxes"

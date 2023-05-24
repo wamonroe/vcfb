@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class DatetimeField < Base
+    class DatetimeField < BaseField
       def initialize(form, method, options = {})
         run_callbacks :initialize do
           @form = form

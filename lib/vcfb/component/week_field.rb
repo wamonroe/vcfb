@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class WeekField < Base
+    class WeekField < BaseField
       def initialize(form, method, options = {})
         run_callbacks :initialize do
           @form = form

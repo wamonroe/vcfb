@@ -23,6 +23,14 @@ module VCFB
         VCFB::Tags::CollectionRadioButtons.new(object, method, self, collection, value_method, text_method, options, html_options).render(&block)
       end
 
+      def resource
+        @form.object
+      end
+
+      def resource_errors?
+        resource&.errors&.present?
+      end
+
       private
 
       def deobjectify_options!(options)

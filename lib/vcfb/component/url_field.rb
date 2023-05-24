@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class UrlField < Base
+    class UrlField < BaseField
       def initialize(form, method, options = {})
         run_callbacks :initialize do
           @form = form

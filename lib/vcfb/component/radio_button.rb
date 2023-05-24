@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class RadioButton < Base
+    class RadioButton < BaseField
       def initialize(form, method, value, options = {})
         run_callbacks :initialize do
           @form = form

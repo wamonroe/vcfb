@@ -1,6 +1,6 @@
 module VCFB
   module Component
-    class FileField < Base
+    class FileField < BaseField
       def initialize(form, method, options = {})
         run_callbacks :initialize do
           @form = form
