@@ -1,5 +1,11 @@
 # VCFB
 
+> [!WARNING]
+> This gem is no longer maintained. With ViewComponent no longer seeing new
+> features, this project is not under active development. Bug fixes and pull
+> requests will not be reviewed or merged. Feel free to fork if you need
+> continued support.
+
 [![Test](https://github.com/wamonroe/vcfb/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/wamonroe/vcfb/actions/workflows/test.yml)
 
 > FormBuilder for Rails using ViewComponent
@@ -16,13 +22,17 @@ of it when initializing `@options` and `@html_options` hashes.
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Getting Started](#getting-started)
-- [Template Inheritance](#template-inheritance)
-  - [SimpleField::Component](#simplefieldcomponent)
-- [Settings](#settings)
-- [Styling Components with TagOptions](#styling-components-with-tagoptions)
-- [Development](#development)
+- [VCFB](#vcfb)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Getting Started](#getting-started)
+  - [Template Inheritance](#template-inheritance)
+    - [SimpleField::Component](#simplefieldcomponent)
+  - [Settings](#settings)
+  - [Styling Components with TagOptions](#styling-components-with-tagoptions)
+  - [Development](#development)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Installation
 
