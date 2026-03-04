@@ -6,8 +6,6 @@
 > requests will not be reviewed or merged. Feel free to fork if you need
 > continued support.
 
-[![Test](https://github.com/wamonroe/vcfb/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/wamonroe/vcfb/actions/workflows/test.yml)
-
 > FormBuilder for Rails using ViewComponent
 
 VCFB provides a `FormBuilder` for use with
